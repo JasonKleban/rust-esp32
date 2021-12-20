@@ -11,9 +11,11 @@ The idealized path, as I believe it to be:
 
 1) Clone `https://github.com/esp-rs/rust-build` locally and just run `./Install-RustToolchain.ps1` but ignore the `idf.py` commands since I don't have/want python and I think those are optional.  DO add the environment variables to powershell (and restart powershell session).
 
-2) `cargo install cargo-espflash`
+2) `cargo install cargo-espflash cargo-espmonitor`
 
 3) Clone _this_ repo locally.
+
+Note the vscode settings.json that tell rust-analyzer that `"RUSTUP_TOOLCHAIN": "esp"` which is akin to `"rustc +esp"`.  This helps rust-analyizer not crash, but I'm not sure it is ideal.
 
 4) Plug in your ESP32 (ex. "HiLetgo ESP32 OLED WiFi Kit ESP-32 0.96 Inch Blue OLED Display WiFi+Bluetooth CP2012" $18) via typical USB connection.  Check Windows' Device Manager to figure out which COM port the device is attached to (ex. COM3).  While the device has power, hold down PRG button during a press of RST - device should be ready to flash.
 
@@ -56,6 +58,56 @@ warning: 2 warnings emitted
 Flashing has completed!
 ```
 
-7) Debugging
+7) `espmonitor --speed 115200 COM3`
 
-Umm... Now what?  Presumably it runs when Reset?  But how to tell without blindly succeeding in writing more code?  How do I configure/attach the VSCode debugger stuff to see, for starters, the console output?
+```
+ESPMonitor 0.6.0
+
+Commands:
+    CTRL+R    Reset chip
+    CTRL+C    Exit
+
+Opening COM3 with speed 115200
+Resetting device... done
+ets Jun  8 2016 00:22:57
+rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0048,len:12
+ho 0 tail 12 room 4
+load:0x3fff0054,len:4800
+load:0x40078000,len:17448
+load:0x4007c428,len:4840
+entry 0x4007c6a0
+I (133) cpu_start: Pro cpu up.
+I (133) cpu_start: Starting app cpu, entry point is 0x400810d0
+I (0) cpu_start: App cpu up.
+I (147) cpu_start: Pro cpu start user code
+I (147) cpu_start: cpu freq: 160000000
+I (147) cpu_start: Application information:
+I (152) cpu_start: Project name:     esp-idf
+I (157) cpu_start: App version:      ac78a27-dirty
+I (162) cpu_start: Compile time:     Dec 20 2021 12:59:47
+I (168) cpu_start: ELF file SHA256:  0000000000000000...
+I (174) cpu_start: ESP-IDF:          4.3.1
+I (179) heap_init: Initializing. RAM available for dynamic allocation:
+I (186) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (192) heap_init: At 3FFB3570 len 0002CA90 (178 KiB): DRAM
+I (199) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (205) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (211) heap_init: At 4008C2F8 len 00013D08 (79 KiB): IRAM
+I (219) spi_flash: detected chip: gd
+I (222) spi_flash: flash io: dio
+W (226) spi_flash: Detected size(8192k) larger than the size in the binary image header(4096k). Using the size in the binary image header.
+I (240) cpu_start: Starting scheduler on PRO CPU.
+I (0) cpu_start: Starting scheduler on APP CPU.
+Hello world!
+Hello world!
+Hello world!
+...
+```
+
+8) Debugging
+
+Not sure how to attach a debugger to this, but espmonitor seems like a great start.

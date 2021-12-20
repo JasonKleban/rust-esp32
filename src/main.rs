@@ -6,7 +6,7 @@ use std::{thread, time::Duration};
 #[export_name = "app_main"]
 fn main() -> ! {
     loop {
-        println!("Hello world");
+        println!("Hello world!");
         thread::sleep(Duration::from_secs(1));
     }
 }
