@@ -17,9 +17,9 @@ The idealized path, as I believe it to be:
 
 3) Clone _this_ repo locally.
 
-Note the vscode settings.json that tell rust-analyzer that `"RUSTUP_TOOLCHAIN": "esp"` which is akin to `"rustc +esp"`.  This helps rust-analyizer not crash, but I'm not sure it is ideal.
+Note the vscode settings.json that tell rust-analyzer that `"RUSTUP_TOOLCHAIN": "esp"` which is akin to `"rustc +esp"`.  This helps rust-analyizer not crash, but I don't know that it is working ideally.
 
-4) Plug in your ESP32 (ex. "HiLetgo ESP32 OLED WiFi Kit ESP-32 0.96 Inch Blue OLED Display WiFi+Bluetooth CP2012" $18) via typical USB connection.  Check Windows' Device Manager to figure out which COM port the device is attached to (ex. COM3).  While the device has power, hold down PRG button during a press of RST - device should be ready to flash.
+4) Plug in your ESP32 (ex. "HiLetgo ESP32 OLED WiFi Kit ESP-32 0.96 Inch Blue OLED Display WiFi+Bluetooth CP2012" $18) via typical USB connection.  Check Windows' Device Manager to figure out which COM port the device is attached to (ex. COM3).
 
 5) `cargo espflash board-info COM3`
 
@@ -107,6 +107,7 @@ I (0) cpu_start: Starting scheduler on APP CPU.
 Hello world!
 Hello world!
 Hello world!
+Hello world!
 ...
 ```
 
@@ -116,4 +117,4 @@ Not sure how to attach a debugger to this, but espmonitor seems like a great sta
 
 ## TODO
 
-* Onboard LED Blinky
+- [X] Onboard LED Blinky
