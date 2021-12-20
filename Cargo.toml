@@ -21,12 +21,12 @@ opt-level = "s"
 bind = []
 
 [dependencies]
-anyhow = {version = "1", features = ["backtrace"]}
-esp-idf-sys = { version = "0.20" }
-embedded-svc = "0.8.3"
-esp-idf-svc = { version = "0.20", features = ["binstart"] }
-esp-idf-hal = "0.20"
+anyhow = { version = "1.0.51", features = ["backtrace"] }
+esp-idf-sys = "0.28.2"
+embedded-svc = "0.15.4"
+esp-idf-svc = "0.34.1"
+esp-idf-hal = "0.29.4"
 
 [build-dependencies]
-embuild = "0.26"
-anyhow = "1"
+embuild = "0.27.0"
+anyhow = "1.0.51"

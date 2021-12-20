@@ -32,27 +32,30 @@ MAC address:       ...
 
 6) `cargo +esp espflash --release COM3`
 
-But after a bunch of compilation steps, I get six of these errors:
+```
+Serial port: COM3
+Connecting...
 
+Chip type:         ESP32 (revision 1)
+Crystal frequency: 26MHz
+Flash size:        8MB
+Features:          WiFi, BT, Dual Core, 240MHz, Coding Scheme None
+MAC address:       7c:9e:bd:5b:9a:7c
+   Compiling rust-esp32 v0.1.0 (C:\Users\Jason\Repos\rust-esp32)
+    Finished release [optimized + debuginfo] target(s) in 6.71s
+warning: unused import: `esp_idf_hal::prelude::*`
+...
+warning: unused import: `esp_idf_svc::sysloop::*`
+...
+warning: 2 warnings emitted
+
+[00:00:01] ########################################      16/16      segment 0x1000
+[00:00:00] ########################################       1/1       segment 0x8000
+[00:00:11] ########################################     108/108     segment 0x10000
+
+Flashing has completed!
 ```
-error[E0532]: expected tuple struct or tuple variant, found function `Ok`
-   --> C:\Users\Jason\.cargo\registry\src\github.com-1ecc6299db9ec823\embuild-0.24.5\src\utils.rs:123:13
-    |
-123 |             Ok(result) => {
-    |             ^^ not a tuple struct or tuple variant
-    |
-   ::: C:\Users\Jason\.cargo\registry\src\github.com-1ecc6299db9ec823\embuild-0.24.5\src\bindgen.rs:164:5
-    |
-164 |     cmd!("rustup", "run", "stable", "rustfmt", output_file)?;
-    |     ------------------------------------------------------- in this macro invocation
-    |
-    = note: this error originates in the macro `cmd` (in Nightly builds, run with -Z macro-backtrace for more info)
-help: consider importing one of these items instead
-    |
-1   | use serde::__private::Ok;
-    |
-1   | use std::result::Result::Ok;
-    |
-1   | use core::result::Result::Ok;
-    |
-```
+
+7) Debugging
+
+Umm... Now what?  Presumably it runs when Reset?  But how to tell without blindly succeeding in writing more code?  How do I configure/attach the VSCode debugger stuff to see, for starters, the console output?
