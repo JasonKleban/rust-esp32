@@ -5,6 +5,8 @@ There's no reason the dev platform needs to matter, but I happen to be attemptin
 
 This project isn't currently successfully getting flashed to the chip (and is therefore in no way validated), but I feel like I'm getting close.
 
+Thanks to https://kerkour.com/rust-on-esp32/ for the hard parts, really.
+
 ## Setup
 
 The idealized path, as I believe it to be:
@@ -111,3 +113,7 @@ Hello world!
 8) Debugging
 
 Not sure how to attach a debugger to this, but espmonitor seems like a great start.
+
+## TODO
+
+* Onboard LED Blinky
