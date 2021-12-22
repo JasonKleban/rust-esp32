@@ -48,12 +48,16 @@ fn main() {
 
     loop {
 
-        println!("Hello world!");
+        println!("Cycle");
+
+        display.clear().expect("BOOM!");
+        display.write_str("Hello World..").expect("BOOM!");
 
         led.set_high().unwrap();
         delay.delay_ms(1000_u32);
 
-        println!("Hello world!");
+        display.clear().expect("BOOM!");
+        display.write_str("Hello World...").expect("BOOM!");
 
         led.set_low().unwrap();
         delay.delay_ms(1000_u32);
