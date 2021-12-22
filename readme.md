@@ -1,9 +1,7 @@
 
 # Hello World on esp32
 
-There's no reason the dev platform needs to matter, but I happen to be attempting this from Windows 10 x64 using VS Code and a basic working Rust/cargo environment already working.
-
-This project isn't currently successfully getting flashed to the chip (and is therefore in no way validated), but I feel like I'm getting close.
+There's no reason the dev platform needs to matter, but I happen to be attempting this from Windows 10 x64 using VS Code and a basic Rust/cargo environment already working.
 
 Thanks to https://kerkour.com/rust-on-esp32/ for the hard parts, really.
 
