@@ -1,65 +1,99 @@
-use esp_idf_hal::delay;
-use esp_idf_hal::prelude::*;
-use esp_idf_hal::i2c;
+#![feature(restricted_std)]
+
+use esp32_hal::{
+    prelude::*,
+    target,
+    delay::Delay,
+    i2c,
+    dport::Split
+};
 use core::fmt::Write;
 use ssd1306::{prelude::*, I2CDisplayInterface, Ssd1306};
 
 #[export_name = "app_main"]
 fn main() {
+    let peripherals = target::Peripherals::take().unwrap();
+    let pins = peripherals.GPIO.split();
 
-    let peripherals = Peripherals::take().unwrap();
-    let pins = peripherals.pins;
+    // peripherals.RTCCNTL.
 
-    let mut oled = pins.gpio5.into_output_od().unwrap();
-    let mut reset = pins.gpio16.into_output_od().unwrap();
-    let i2c = peripherals.i2c0;
-    let sda = pins.gpio4;
-    let scl = pins.gpio15;
+    // disable_rtc_wdt();
 
-    let config = <i2c::config::MasterConfig as Default>::default().baudrate(400.kHz().into());
+    // let mut oled = pins.gpio5.into_open_drain_output();
+    // let mut reset = pins.gpio16.into_open_drain_output();
+    // let i2c = peripherals.I2C0;
+    // let sda = pins.gpio4;
+    // let scl = pins.gpio15;
 
-    let interface = I2CDisplayInterface::new(i2c::Master::<i2c::I2C0, _, _>::new(
-        i2c,
-        i2c::MasterPins { sda, scl },
-        config,
-    ).unwrap());
+    let mut delay = Delay::new();
 
-    oled.set_high().unwrap();
-    reset.set_low().unwrap();
-    reset.set_high().unwrap();
+    // let (mut dport, dport_clock_control) = peripherals.DPORT.split();
 
-    let mut display = Ssd1306::new(
-        interface,
-        DisplaySize128x64,
-        DisplayRotation::Rotate0,
-    ).into_terminal_mode();
+    // let interface = I2CDisplayInterface::new(i2c::I2C::new(
+    //     i2c,
+    //     i2c::Pins { sda, scl },
+    //     400_000_u32,
+    //     &mut dport
+    // ));
 
-    display.init().unwrap();
+    // oled.set_high().unwrap();
+    // reset.set_low().unwrap();
+    // reset.set_high().unwrap();
 
-    display.clear().expect("BOOM!");
+    // let mut display = Ssd1306::new(
+    //     interface,
+    //     DisplaySize128x64,
+    //     DisplayRotation::Rotate0,
+    // ).into_terminal_mode();
 
-    display.write_str("Hello World!").expect("BOOM!");
+    // display.init().unwrap();
+
+    // display.clear().expect("BOOM!");
+
+    // display.write_str("Hello World!").expect("BOOM!");
 
     // Blinky:
 
-    let mut led = pins.gpio25.into_output_od().unwrap();
-
-    let mut delay = delay::FreeRtos;
+    let mut led = pins.gpio25.into_open_drain_output();
 
     loop {
 
         println!("Cycle");
 
-        display.clear().expect("BOOM!");
-        display.write_str("Hello World..").expect("BOOM!");
+        // display.clear().expect("BOOM!");
+        // display.write_str("Hello World..").expect("BOOM!");
 
         led.set_high().unwrap();
         delay.delay_ms(1000_u32);
 
-        display.clear().expect("BOOM!");
-        display.write_str("Hello World...").expect("BOOM!");
+        // display.clear().expect("BOOM!");
+        // display.write_str("Hello World...").expect("BOOM!");
 
         led.set_low().unwrap();
         delay.delay_ms(1000_u32);
     }
+}
+
+// unused
+fn disable_rtc_wdt(rtccntl: &mut esp32::RTCCNTL) {
+    /* Disables write protection */
+    rtccntl.wdtwprotect.write(|w| unsafe { w.bits(WDT_WKEY_VALUE) });
+    /* Disables all wdt stages & the global watchdog flag itself */
+    rtccntl.wdtconfig0.modify(|_, w| unsafe {
+        w
+        .wdt_stg0()
+        .bits(0x0)
+        .wdt_stg1()
+        .bits(0x0)
+        .wdt_stg2()
+        .bits(0x0)
+        .wdt_stg3()
+        .bits(0x0)
+        .wdt_flashboot_mod_en()
+        .clear_bit()
+        .wdt_en()
+        .clear_bit()
+    });
+    /* Re-enables write protection */
+    rtccntl.wdtwprotect.write(|w| unsafe { w.bits(0x0) });
 }

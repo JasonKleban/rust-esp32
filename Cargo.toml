@@ -6,8 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 # No xtensa in regular compiler yet
-[package.metadata.docs.rs]
-default-target = "x86_64-unknown-linux-gnu"
+# [package.metadata.docs.rs]
+# default-target = "x86_64-unknown-linux-gnu"
 
 [profile.release]
 # symbols are nice and they don't increase the size on Flash
@@ -21,13 +21,16 @@ opt-level = "s"
 bind = []
 
 [dependencies]
-anyhow = { version = "1.0.51", features = ["backtrace"] }
-esp-idf-sys = "0.28.2"
-embedded-svc = "0.15.4"
-esp-idf-svc = "0.34.1"
-esp-idf-hal = "0.29.4"
+# anyhow = { version = "1.0.51", features = ["backtrace"] }
+# esp-idf-sys = "0.28.2"
+# embedded-svc = "0.15.4"
+# esp-idf-svc = "0.34.1"
+# esp-idf-hal = "0.29.4"
 ssd1306 = "0.7.0"
+esp32 = "0.11.0"
+esp32-hal = "0.3.0"
+# embedded-hal = "0.2.6"
 
 [build-dependencies]
 embuild = "0.27.0"
-anyhow = "1.0.51"
+# anyhow = "1.0.51"
