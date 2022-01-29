@@ -29,6 +29,7 @@ bind = []
 ssd1306 = "0.7.0"
 esp32 = "0.11.0"
 esp32-hal = "0.3.0"
+riscv-rt = "0.8.1"
 # embedded-hal = "0.2.6"
 
 [build-dependencies]
