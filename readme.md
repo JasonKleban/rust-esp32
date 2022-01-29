@@ -124,6 +124,9 @@ This branch is an attempt to get away from the IDF stuff that I don't understand
 On startup, this basically repeats.  I'm not sure how to interpret this output.  What does this mean?
 
 ```
+Opening COM3 with speed 115200
+Resetting device... done
+epc3=0x00000000, excvaddr=0x00000000, depc=0x00000000
 ets Jun  8 2016 00:22:57
 rst:0x1 (POWERON_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
 configsip: 0, SPIWP:0xee
@@ -135,26 +138,6 @@ load:0x3fff0054,len:4800
 load:0x40078000,len:17448
 load:0x4007c428,len:4840
 entry 0x4007c6a0
-ets Jun  8 2016 00:22:57
-rst:0x10 (RTCWDT_RTC_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
-configsip: 0, SPIWP:0xee
-clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
-mode:DIO, clock div:2
-load:0x3fff0048,len:12
-ho 0 tail 12 room 4
-load:0x3fff0054,len:4800
-load:0x40078000,len:17448
-load:0x4007c428,len:4840
-entry 0x4007c6a0
-ets Jun  8 2016 00:22:57
-rst:0x10 (RTCWDT_RTC_RESET),boot:0x17 (SPI_FAST_FLASH_BOOT)
-configsip: 0, SPIWP:0xee
-clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
-mode:DIO, clock div:2
-load:0x3fff0048,len:12
-ho 0 tail 12 room 4
-load:0x3fff0054,len:4800
-load:0x40078000,len:17448
-load:0x4007c428,len:4840
-entry 0x4007c6a0
+Fatal exception (0): IllegalInstruction
+epc1=0x400d0020, epc2=0x00000000, epc3=0x00000000, excvaddr=0x00000000, depc=0x00000000
 ```
